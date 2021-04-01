@@ -19,9 +19,15 @@ export default class TodoList extends React.Component {
     todos : []
   }
 
+  addTodo = (todo) => {
+    this.setState({
+      todos : [todo, ...this.state.todos]
+    })
+  }
+
   render() {
     return (
-      <TodoForm todos={this.state.todos}/>
+      <TodoForm todos={this.state.todos} addTodo={this.addTodo}/>
     )
   }
 }

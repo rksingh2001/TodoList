@@ -14,16 +14,8 @@ export default class TodoForm extends React.Component {
   // Not finished
   handleSubmit = (event) => {
     event.preventDefault();
-    let newTodos = [this.state.text];
-    if (this.state.todos)
-      newTodos = newTodos.concat(this.state.todos);
-    this.setState({
-      todos : newTodos
-    })
-    this.setState({
-      text : ''
-    })
-    console.log(JSON.stringify(this.state.todos));
+    this.props.addTodo(this.state.text);
+    console.log(this.props.todos);
   }
 
   render() {
@@ -36,6 +28,7 @@ export default class TodoForm extends React.Component {
           onSubmit={this.handleSubmit}
           value={this.state.text}
         />
+        <button onSubmit={this.handleSubmit}>Submit</button>
       </form>
     )
   }
