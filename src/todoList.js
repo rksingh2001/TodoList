@@ -1,5 +1,6 @@
 import React from 'react'
 import TodoForm from './TodoForm'
+import ShortId from 'shortid'
 
 /*
   Todo List Features : 
@@ -21,13 +22,20 @@ export default class TodoList extends React.Component {
 
   addTodo = (todo) => {
     this.setState({
-      todos : [todo, ...this.state.todos]
+      todos : [todo, ...this.state.todos],
+      id : ShortId.generate(),
+      complete : false
     })
   }
 
   render() {
     return (
-      <TodoForm todos={this.state.todos} addTodo={this.addTodo}/>
+      <div>
+        <TodoForm todos={this.state.todos} addTodo={this.addTodo}/>
+        {this.state.todos.map((todo) => (
+          <div key={todo.id}>{todo}</div>
+        ))}
+      </div>
     )
   }
 }
