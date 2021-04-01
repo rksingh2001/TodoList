@@ -1,40 +1,27 @@
 import React from 'react'
-import TodoForm from './todoForm'
-import Todo from './todo'
+import TodoForm from './TodoForm'
 
 /*
-  TodoList
-  1. add Todo
-  2. display todos
-  3. cross off todos
-  4. show number of active todos
-  5. filter all/active/complete
-  6. delete todo
-  7. delete all complete
+  Todo List Features : 
+  1. Add Todo
+  2. Display TodoList
+  3. Cross Off Todos
+  4. Show Number of Active Todos
+  5. FIlter all/active/complete
+  6. Delete Todos
+  7. Delete All Complete
     7.1 only show if atleast one is complete
-  8. butoon to toggle all on/off
+  8. Button to Toggle All On or Off
 */
 
 export default class TodoList extends React.Component {
   state = {
     todos : []
-  };
-
-  addTodo = (todo) => {
-    const newTodo = [todo, ...this.state.todos];
-    this.setState({
-      todos : newTodo
-    });
-  };
+  }
 
   render() {
     return (
-      <div>
-        <TodoForm onSubmit={this.addTodo} />
-        {this.state.todos.map(todo => (
-          <Todo key={todo.id} text={todo.text} />
-        ))}
-      </div>
+      <TodoForm todos={this.state.todos}/>
     )
   }
 }

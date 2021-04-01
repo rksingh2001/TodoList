@@ -1,38 +1,42 @@
 import React from 'react'
-import ShortID from 'shortid'
 
 export default class TodoForm extends React.Component {
   state = {
-    text : ''
+    text : '',
   }
 
   handleChange = (event) => {
-    this.setState({[event.target.name] : event.target.value});
+    this.setState({
+      text : event.target.value
+    })
   }
 
+  // Not finished
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.onSubmit({
-      id : ShortID.generate(),
-      text : this.state.text,
-      complete : false
+    let newTodos = [this.state.text];
+    if (this.state.todos)
+      newTodos = newTodos.concat(this.state.todos);
+    this.setState({
+      todos : newTodos
     })
     this.setState({
-      text : '',
+      text : ''
     })
+    console.log(JSON.stringify(this.state.todos));
   }
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <input
-          name="text"
-          placeholder="todo.."
-          onChange={this.handleChange} 
-          value = {this.state.text}
+        <input 
+          type="text" 
+          placeholder="Enter Todo" 
+          onChange={this.handleChange}
+          onSubmit={this.handleSubmit}
+          value={this.state.text}
         />
-        <button onClick={this.handleSubmit}>Submit</button>
       </form>
-    ) 
+    )
   }
-}
+} 
