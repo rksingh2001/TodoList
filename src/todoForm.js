@@ -15,14 +15,16 @@ export default class TodoForm extends React.Component {
   // Not finished
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.addTodo({
-      id : ShortId.generate(),
-      text : this.state.text,
-      complete : false
-    });
-    this.setState({
-      text : '',
-    })
+    if (this.state.text !== '') {
+      this.props.addTodo({
+        id : ShortId.generate(),
+        text : this.state.text,
+        complete : false
+      });
+      this.setState({
+        text : '',
+      })
+    }
   }
 
   render() {
