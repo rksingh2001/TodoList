@@ -17,7 +17,8 @@ import Todo from './Todo'
 
 export default class TodoList extends React.Component {
   state = {
-    todos : []
+    todos : [],
+    todoFilter : 'All',
   }
 
   addTodo = (todo) => {
@@ -41,18 +42,34 @@ export default class TodoList extends React.Component {
     })
   }
 
+  updateFilter = (filter) => {
+    this.setState({
+      todoFilter : filter
+    })
+  }
+
   render() {
+    let todos = [];
+    if (this.state.todoFilter === 'All') todos = this.state.todos;
+    if (this.state.todoFilter === 'Active') todos = this.state.todos.filter(todo => !todo.complete);
+    if (this.state.todoFilter === 'Complete') todos = this.state.todos.filter(todo => todo.complete);
+
     return (
       <div>
         <TodoForm todos={this.state.todos} addTodo={this.addTodo}/>
         <div style={{color : 'limegreen'}}>Active : {this.state.todos.filter(todo => !todo.complete).length}</div>
-        {this.state.todos.map((todo) => (
+        {todos.map((todo) => (
           <Todo
-            todo={todo} 
+            todo={todo}
             key={todo.id} 
             toggleComplete={() => this.toggleComplete(todo.id)}
           />
         ))}
+        <div>
+          <button onClick={() => this.updateFilter('All')}>All</button>
+          <button onClick={() => this.updateFilter('Active')}>Active</button>
+          <button onClick={() => this.updateFilter('Complete')}>Complete</button>
+        </div>
       </div>
     )
   }
