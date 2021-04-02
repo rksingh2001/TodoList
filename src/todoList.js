@@ -8,7 +8,7 @@ import Todo from './Todo'
   2. Display TodoList
   3. Cross Off Todos
   4. Show Number of Active Todos
-  5. FIlter all/active/complete
+  5. Filter all/active/complete
   6. Delete Todos
   7. Delete All Complete
     7.1 only show if atleast one is complete
@@ -44,8 +44,8 @@ export default class TodoList extends React.Component {
   render() {
     return (
       <div>
-        <TodoForm todos={this.state.todos}
-        addTodo={this.addTodo}/>
+        <TodoForm todos={this.state.todos} addTodo={this.addTodo}/>
+        <div style={{color : 'limegreen'}}>Active : {this.state.todos.filter(todo => !todo.complete).length}</div>
         {this.state.todos.map((todo) => (
           <Todo
             todo={todo} 
