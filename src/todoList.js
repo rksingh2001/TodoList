@@ -60,6 +60,15 @@ export default class TodoList extends React.Component {
     })
   }
 
+  markAllDone = () => {
+    this.setState({
+      todos : this.state.todos.map(todo =>({
+        ...todo,
+        complete : true
+      }))
+    })
+  }
+
   render() {
     let todos = [];
     if (this.state.todoFilter === 'All') todos = this.state.todos;
@@ -82,6 +91,11 @@ export default class TodoList extends React.Component {
           <button onClick={() => this.updateFilter('All')}>All</button>
           <button onClick={() => this.updateFilter('Active')}>Active</button>
           <button onClick={() => this.updateFilter('Complete')}>Complete</button>
+        </div>
+        <div>
+          <button onClick={this.markAllDone}>
+            Mark All Done
+          </button>
         </div>
         <div>
         {this.state.todos.filter(todo => todo.complete).length ?
