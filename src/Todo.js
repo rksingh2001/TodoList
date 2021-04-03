@@ -13,8 +13,8 @@ export default class Todo extends React.Component {
           onClick={this.props.toggleComplete}
         >
           {this.props.todo.text}
-        </div>
           <button onClick={this.props.deleteTodo}>X</button>
+        </div>
       </div>
     )
   }
