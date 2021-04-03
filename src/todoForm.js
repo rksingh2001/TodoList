@@ -19,7 +19,8 @@ export default class TodoForm extends React.Component {
       this.props.addTodo({
         id : ShortId.generate(),
         text : this.state.text,
-        complete : false
+        complete : false,
+        starred : false
       });
       this.setState({
         text : '',

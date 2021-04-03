@@ -69,22 +69,54 @@ export default class TodoList extends React.Component {
     })
   }
 
+  star = (id) => {
+    console.log('star')
+    if (this.state.todos.id === id) {
+      this.setState({
+        todos : this.state.todos.map(todo => {
+          if (todo.id === id) {
+            return {
+              ...todo,
+              starred : !todo.starred
+            }
+          } else {
+            return todo;
+          }
+        })
+      })
+    }
+  }
+
   render() {
+    // Starred
+    const starredTodos = this.state.todos.filter(todo => todo.starred);
+
+    // Not starred
     let todos = [];
-    if (this.state.todoFilter === 'All') todos = this.state.todos;
-    if (this.state.todoFilter === 'Active') todos = this.state.todos.filter(todo => !todo.complete);
-    if (this.state.todoFilter === 'Complete') todos = this.state.todos.filter(todo => todo.complete);
+    if (this.state.todoFilter === 'All') todos = this.state.todos.filter(todo => !todo.starred);
+    if (this.state.todoFilter === 'Active') todos = this.state.todos.filter(todo => !todo.complete && !todo.starred);
+    if (this.state.todoFilter === 'Complete') todos = this.state.todos.filter(todo => todo.complete && !todo.starred);
 
     return (
       <div>
         <TodoForm todos={this.state.todos} addTodo={this.addTodo}/>
         <div style={{color : 'limegreen'}}>Active : {this.state.todos.filter(todo => !todo.complete).length}</div>
+        {starredTodos.map(todo => (
+          <Todo 
+            todo={todo}
+            key={todo.id} 
+            toggleComplete={() => this.toggleComplete(todo.id)}
+            deleteTodo={() => this.deleteTodo(todo.id)}
+            star={() => this.star(todo.id)}
+          />
+        ))}
         {todos.map((todo) => (
           <Todo
             todo={todo}
             key={todo.id} 
             toggleComplete={() => this.toggleComplete(todo.id)}
             deleteTodo={() => this.deleteTodo(todo.id)}
+            star={() => this.star(todo.id)}
           />
         ))}
         <div>

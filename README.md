@@ -10,4 +10,5 @@ This is a Todo List
   7. Delete All Complete
     7.1 only show if atleast one is complete
   8. Button to Toggle All On or Off
+  9. Add option to star which will show on top
 */
