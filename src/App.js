@@ -5,7 +5,9 @@ import TodoList from './TodoList';
 class App extends React.Component {
   render() {
     return (
+      <center>
       <TodoList />
+      </center>
     );
   }
 }
